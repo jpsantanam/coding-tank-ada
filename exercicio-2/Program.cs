@@ -27,43 +27,56 @@ public class Program
             }
         } while (!numeroValido);
 
-        if (numero1 < 0 && numero2 < 0)
+        if (numero1 == 0 || numero2 == 0)
         {
-            numero1 -= numero1 + numero1;
-            numero2 -= numero2 + numero2;
-        }
-        else if (numero1 < 0)
-        {
-            sinal = '-';
-            numero1 -= numero1 + numero1;
-        }
-        else if (numero2 < 0)
-        {
-            sinal = '-';
-            numero2 -= numero2 + numero2;
-        }
-
-        for (int i = 0; i < numero1; i++)
-        {
-            produto += numero2;
-        }
-
-        if (numero2 > numero1)
-        {
-            quociente = 0;
-            sinal = '\0';
+            Console.WriteLine($"Produto: 0");
         }
         else
         {
-            do
+            if (numero1 < 0 && numero2 < 0)
             {
-                numero1 -= numero2;
-                quociente++;
-            } while ((numero1 - numero2) >= 0);
+                numero1 -= numero1 + numero1;
+                numero2 -= numero2 + numero2;
+            }
+            else if (numero1 < 0)
+            {
+                sinal = '-';
+                numero1 -= numero1 + numero1;
+            }
+            else if (numero2 < 0)
+            {
+                sinal = '-';
+                numero2 -= numero2 + numero2;
+            }
+
+            for (int i = 0; i < numero1; i++)
+            {
+                produto += numero2;
+            }
+            Console.WriteLine($"Produto: {sinal}{produto}");
         }
 
-        Console.WriteLine($"Produto: {sinal}{produto}");
-        Console.WriteLine($"Quociente: {sinal}{quociente}");
+        if (numero2 != 0)
+        {
+            if (numero2 > numero1)
+            {
+                quociente = 0;
+                sinal = '\0';
+            }
+            else
+            {
+                do
+                {
+                    numero1 -= numero2;
+                    quociente++;
+                } while ((numero1 - numero2) >= 0);
+            }
+            Console.WriteLine($"Quociente: {sinal}{quociente}");
+        }
+        else
+        {
+            Console.WriteLine($"Não é possível dividir por 0");
+        }
 
     }
 }
