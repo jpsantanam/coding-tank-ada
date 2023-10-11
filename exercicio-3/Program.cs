@@ -3,8 +3,8 @@ public class Program
     public static void Main(string[] args)
     {
         string frase;
-        string[] palavras, letras;
-        int maiusculas = 0, minusculas = 0, inicialMaiuscula = 0, inicialMinuscula = 0, quantidadePalavras;
+        string[] palavras;
+        int maiusculas = 0, minusculas = 0, inicialMaiuscula = 0, inicialMinuscula = 0, quantidadePalavras = 0;
 
         Console.WriteLine("Digite uma frase.");
         frase = Console.ReadLine();
@@ -12,34 +12,36 @@ public class Program
 
         foreach (string palavra in palavras)
         {
-            int contMaiusculas = 0;
-            foreach (char letra in palavra)
+            if (!int.TryParse(palavra, out _))
             {
-                if (Char.IsUpper(letra))
+                quantidadePalavras++;
+                int contMaiusculas = 0;
+                foreach (char letra in palavra)
                 {
-                    contMaiusculas++;
+                    if (Char.IsUpper(letra))
+                    {
+                        contMaiusculas++;
 
+                    }
+                }
+                if (contMaiusculas == palavra.Length)
+                {
+                    maiusculas++;
+                }
+                else if (contMaiusculas == 0)
+                {
+                    minusculas++;
+                }
+                else if (Char.IsUpper(palavra[0]))
+                {
+                    inicialMaiuscula++;
+                }
+                else if (Char.IsLower(palavra[0]))
+                {
+                    inicialMinuscula++;
                 }
             }
-            if (contMaiusculas == palavra.Length)
-            {
-                maiusculas++;
-            }
-            else if (contMaiusculas == 0)
-            {
-                minusculas++;
-            }
-            else if (Char.IsUpper(palavra[0]))
-            {
-                inicialMaiuscula++;
-            }
-            else if (Char.IsLower(palavra[0]))
-            {
-                inicialMinuscula++;
-            }
         }
-
-        quantidadePalavras = palavras.Length;
 
         Console.WriteLine($"Maiúsculas: {maiusculas}");
         Console.WriteLine($"Minúsculas: {minusculas}");
